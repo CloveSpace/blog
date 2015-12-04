@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Blog by CloveSpace</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Blog</h1>
+        <h2>博客</h2>
+        <a href="https://github.com/CloveSpace/blog" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h3>
+<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lamp yum安装LAMP环境</h3>
+
+<p><h1></h1>
+<pre>
+  centos 6.5
+
+1.yum安装和源代码编译在使用的时候没啥区别，但是安装的过程就大相径庭了，yum只需要3个命令就可以完成，<p>源代码需要13个包，还得加压编译，步骤很麻烦，而且当做有时候会出错，源代码编译安装大概需要2个小时，</p>好处在于可以自己配置地址等一些参数，yum安装半个小时搞定，一般不会出错，更新也很方便。
+
+2.我的机器是centos release 5.9 64为的系统，一般机器都带yum命令，并且yum包源都是可以用的，就是说不用你自己下载东西，直接yum -y install 后面加上你所需要安装的软件，他会自动下载自动安装，非常方便。例如 yum -y install httpd自动下载并安装apache服务器。lamp环境只需要安装httpd,mysql,php
+
+3.首先更新一下yum -y update
+
+4.用yum安装Apache,Mysql,PHP.
+
+4.1安装Apache 
+yum install httpd httpd-devel 
+安装完成后，用/etc/init.d/httpd start 启动apache 
+设为开机启动:chkconfig httpd on
+
+4.2 安装mysql 
+yum install mysql mysql-server mysql-devel 
+同样，完成后，用/etc/init.d/mysqld start 启动mysql
+
+4.3 设置mysql密码 
+mysql>; USE mysql; 
+mysql>; UPDATE user SET Password=PASSWORD('newpassword') WHERE user='root'; 
+mysql>; FLUSH PRIVILEGES;
+
+设置mysql密码还可以用：mysql_secure_installation 命令
+
+4.4允许远程登录 
+mysql -u root -p 
+Enter Password: <your new password> 
+mysql>GRANT ALL PRIVILEGES ON *.* TO '用户名'@'%' IDENTIFIED BY '密码' WITH GRANT OPTION; 
+完成后就能用mysql-front远程管理mysql了。 
+设为开机启动 
+chkconfig mysqld on
+
+4.5安装php 
+yum install php php-mysql php-common php-gd php-mbstring php-mcrypt php-devel php-xml 
+/etc/init.d/httpd start
+
+5. 测试一下 
+在/var/www/html/新建个test.php文件，将以下内容写入，然后保存。 
+<? 
+phpinfo(); 
+?> 
+防火墙配置 
+a.添加.允许访问端口{80: http}. 
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+b.关闭防火墙{不推荐}. 
+service iptables stop 
+c.重置加载防火墙 
+service iptables restart
+
+6. 然后在客户端浏览器里打开http://serverip/test.php，若能成功显示，则表示安装成功。 
+至此，安装完毕。
+</pre>
+</p>
+
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/CloveSpace/blog/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/CloveSpace/blog/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/CloveSpace/blog"></a>  <a href="https://github.com/CloveSpace">CloveSpace</a>.</p>
+
+          <p><h3>LAMP</h3> 
+            <a href="https://www.clove.ren/lampins.html">centos yum安装LAMP环境</a>
+          </p>
+
+          <p><h3>主从复制</h3> 
+            <a href="https://www.clove.ren/massal.html">主从环境搭建</a>
+          </p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
