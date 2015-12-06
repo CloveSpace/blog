@@ -1,0 +1,20 @@
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #9FC3F0;
+}
+h3 {
+	margin: 0;
+	padding: 0;
+}
+a {
+	text-decoration: none;
+	font-size: 16px;
+	color: #7B3EE3;
+	font-weight: bold;
+}
+a:hover{color:#FF9326;}
+.zy{
+	padding-left: 5px;
+	padding-top: 10px;
+}

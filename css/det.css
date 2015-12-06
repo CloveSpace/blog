@@ -1,0 +1,19 @@
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #EBF2FC;
+}
+h3 {
+	margin: 0;
+	padding: 0;
+}
+a {
+	text-decoration: none;
+}
+.det {
+	background-color: #E6E6E6;
+	width: 800px;
+	margin: 0 auto;
+	margin-top:20px; 
+	padding: 15px;
+}

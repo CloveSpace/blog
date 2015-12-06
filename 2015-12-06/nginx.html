@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<link href="../css/det.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src=" "></script>
+	<title>nginx</title>
+</head>
+<body>
+	<div class="det">
+		<h1>nginx安装</h1>
+		<hr />
+		<p>
+			下载地址: <a href="http://nginx.org/download/nginx-1.4.2.tar.gz">http://nginx.org/download/nginx-1.4.2.tar.gz</a><br />
+			安装准备: nginx依赖于pcre库,要先安装pcre<br>
+yum install pcre pcre-devel<br>
+ cd /usr/local/src/<br>
+ wget http://nginx.org/download/nginx-1.4.2.tar.gz<br>
+tar zxvf nginx-1.4.2.tar.gz <br>
+cd nginx-1.4.2<br>
+./configure --prefix=/usr/local/nginx<br>
+make &amp;&amp; make install<br>
+<br>
+启动:<br>
+cd /ulsr/local/nginx, 看到如下4个目录<br>
+./<br>
+ ....conf 配置文件  <br>
+ ... html 网页文件<br>
+ ...logs  日志文件 <br>
+ ...sbin  主要二进制程序<br>
+<br>
+[root@localhost nginx]# ./sbin/nginx <br>
+nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)<br>
+....<br>
+nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)<br>
+nginx: [emerg] still could not bind()<br>
+<br>
+不能绑定80端口,80端口已经被占用<br>
+(有时是自己装了apache,nginx等,还有更多情况是操作系统自带了apache并作为服务启动)<br>
+解决: 把占用80端口的软件或服务关闭即可.
+
+		</p>
+	</div>
+</body>
+</html>
