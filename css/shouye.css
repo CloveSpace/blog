@@ -9,7 +9,11 @@ h3 {
 }
 a {
 	text-decoration: none;
+	font-size: 16px;
+	color: #7B3EE3;
+	font-weight: bold;
 }
+a:hover{color:#FF9326;}
 .menu , .menu ul ,  .menu ul li{
 	margin: 0;
 	padding: 0;
