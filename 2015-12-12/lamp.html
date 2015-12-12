@@ -12,83 +12,83 @@
 		<hr />
 		<p>
 			1）安装apache
-#软件版本为httpd-2.2.9.tar.gz
-shell> cd /usr/local/src
-shell> tar -zxvf httpd-2.2.9.tar.gz
-shell> cd httpd-2.2.9
- shell>./configure --prefix=/usr/local/apache  \
-	--enable-modules=all \
-	--enable-rewrite \
-	--enable-mods-shared=all \
-	--enable-so
-shell> make 
-shell> make install
-
-#启动Apache
-/usr/local/apache/bin/apachectl start
-开启服务：/usr/local/apache/bin/apachectl start|stop|restart
-
-#查看是否启动成功
-netstat -tunpl | grep 80
-#测试apache
-浏览器打开: http://虚拟机IP 
-看到 "it works!",即为成功
-
-2): 编译安装MySQL
-软件版本：mysql-5.1.58.tar.gz
-shell>groupadd mysql
-shell>useradd mysql -g mysql
-shell>tar -zxvf mysql-5.1.58.tar.gz
-shell>cd mysql-5.1.58
-#配置mysql编译选项，指定安装路径及支持的字符集
-shell>./configure --prefix=/usr/local/mysql \
-	--with-charset=utf8 \
-	--with-extra-charsets=gbk,gb2312,binary
-#编译安装
-shell>make
-shell>make install
-#配置并初始化mysql
-shell>cp support-files/my-medium.cnf /etc/my.cnf
-shell>cd /usr/local/mysql
-#初始化数据库
-shell>./bin/mysql_install_db --user=mysql \
-	--datadir=/usr/local/mysql/data
-
-
-#为了安全，把所有文件修改为root用户所有，
-shell>chown -R root .
-#把data目录修改为mysql用户所有
-shell>chown -R mysql data
-shell>chgrp -R mysql .
-#启动mysql服务
-shell>bin/mysqld_safe --user=mysql &
-#测试服务器，并设置mysql root用户密码
-use mysql
-update user set password=PASSWORD('root') where user='root'
-#清空权限缓存，使更改立即生效。
-flush privileges
-
-3)安装php
-shell>tar -zxvf php
-shell>cd php
-shell>./configure --prefix=/usr/local/php \
-	--with-apxs2=/usr/local/apache/bin/apxs \
-	--with-mysql=/usr/local/mysql
-shell>make && make install
-
-4)整合LAMP
-# 打开apache配置文件，添加AddType
-LoadModule php5_module modules/libphp5.so
-AddType application/x-httpd-php .php
-
-cp php-5.2.5/php.ini-dist /usr/local/php/lib/php.ini
-5)把apache和mysql配置为开机启动。
-打开 /etc/rc.local,linux系统每次启动后都会自动执行这个文件，在该文件中，加入以下两行内容：
-/usr/local/apache/bin/apachectl start
-/usr/local/mysql/bin/mysql_safe --user=mysql &
-
-该socket文件，在/var/lib/mysql/mysql.sock
-
+<br>#软件版本为httpd-2.2.9.tar.gz
+<br>shell> cd /usr/local/src
+<br>shell> tar -zxvf httpd-2.2.9.tar.gz
+<br>shell> cd httpd-2.2.9
+<br> shell>./configure --prefix=/usr/local/apache  \
+<br>	--enable-modules=all \
+<br>	--enable-rewrite \
+<br>	--enable-mods-shared=all \
+<br>	--enable-so
+<br>shell> make 
+<br>shell> make install
+<br>
+<br>#启动Apache
+<br>/usr/local/apache/bin/apachectl start
+<br>开启服务：/usr/local/apache/bin/apachectl start|stop|restart
+<br>
+<br>#查看是否启动成功
+<br>netstat -tunpl | grep 80
+<br>#测试apache
+<br>浏览器打开: http://虚拟机IP 
+<br>看到 "it works!",即为成功
+<br>
+<br>2): 编译安装MySQL
+<br>软件版本：mysql-5.1.58.tar.gz
+<br>shell>groupadd mysql
+<br>shell>useradd mysql -g mysql
+<br>shell>tar -zxvf mysql-5.1.58.tar.gz
+<br>shell>cd mysql-5.1.58
+<br>#配置mysql编译选项，指定安装路径及支持的字符集
+<br>shell>./configure --prefix=/usr/local/mysql \
+<br>	--with-charset=utf8 \
+<br>	--with-extra-charsets=gbk,gb2312,binary
+<br>#编译安装
+<br>shell>make
+<br>shell>make install
+<br>#配置并初始化mysql
+<br>shell>cp support-files/my-medium.cnf /etc/my.cnf
+<br>shell>cd /usr/local/mysql
+<br>#初始化数据库
+<br>shell>./bin/mysql_install_db --user=mysql \
+<br>	--datadir=/usr/local/mysql/data
+<br>
+<br>
+<br>#为了安全，把所有文件修改为root用户所有，
+<br>shell>chown -R root .
+<br>#把data目录修改为mysql用户所有
+<br>shell>chown -R mysql data
+<br>shell>chgrp -R mysql .
+<br>#启动mysql服务
+<br>shell>bin/mysqld_safe --user=mysql &
+<br>#测试服务器，并设置mysql root用户密码
+<br>use mysql
+<br>update user set password=PASSWORD('root') where user='root'
+<br>#清空权限缓存，使更改立即生效。
+<br>flush privileges
+<br>
+<br>3)安装php
+<br>shell>tar -zxvf php
+<br>shell>cd php
+<br>shell>./configure --prefix=/usr/local/php \
+<br>	--with-apxs2=/usr/local/apache/bin/apxs \
+<br>	--with-mysql=/usr/local/mysql
+<br>shell>make && make install
+<br>
+<br>4)整合LAMP
+<br># 打开apache配置文件，添加AddType
+<br>LoadModule php5_module modules/libphp5.so
+<br>AddType application/x-httpd-php .php
+<br>
+<br>cp php-5.2.5/php.ini-dist /usr/local/php/lib/php.ini
+<br>5)把apache和mysql配置为开机启动。
+<br>打开 /etc/rc.local,linux系统每次启动后都会自动执行这个文件，在该文件中，加入以下两行内容：
+<br>/usr/local/apache/bin/apachectl start
+<br>/usr/local/mysql/bin/mysql_safe --user=mysql &
+<br>
+<br>该socket文件，在/var/lib/mysql/mysql.sock
+<br>
 		</p>
 	</div>
 </body>
