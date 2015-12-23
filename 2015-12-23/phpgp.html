@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<link href="../css/det.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src=" "></script>
+	<title>socket</title>
+</head>
+<body>
+	<div class="det">
+		<h1>socket</h1>
+		<hr />
+		<p>
+		（1）php 通过 file_get_contents 模拟发送 get 请求
+
+1
+<?php
+2
+$url='http://www.phpernote.com/php-function/654.html';
+3
+$re=file_get_contents($url);
+4
+print_r($re);
+（2）php 通过 curl 模拟发送 get 请求
+
+1
+<?php
+2
+$ch=curl_init('http://www.phpernote.com/php-function/651.html');
+3
+curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+4
+curl_setopt($ch,CURLOPT_BINARYTRANSFER,true);
+5
+$output=curl_exec($ch);
+6
+$fh=fopen("out.html",'w');
+7
+fwrite($fh,$output);
+8
+fclose($fh);
+（3）php 通过 fsocket 模拟发送 get 请求
+
+01
+<?php
+02
+function sock_get($url){ 
+03
+    $info=parse_url($url);
+04
+    $fp=fsockopen($info["host"],80,$errno,$errstr,3);
+05
+    $head="GET ".$info['path']."?".$info["query"]." HTTP/1.0\r\n";
+06
+    $head.="Host: ".$info['host']."\r\n";
+07
+    $head.="\r\n";
+08
+    $write=fputs($fp,$head);
+09
+    while(!feof($fp)){ 
+10
+        $line=fgets($fp);
+11
+        echo $line."<br>";
+12
+    }
+13
+}
+</p>
+	</div>
+</body>
+</html>

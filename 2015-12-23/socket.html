@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<link href="../css/det.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src=" "></script>
+	<title>socket</title>
+</head>
+<body>
+	<div class="det">
+		<h1>socket</h1>
+		<hr />
+		<p>
+			<p style="margin:10px auto; padding-top:0px; padding-bottom:0px; color:rgb(73,73,73); font-size:14px; line-height:22px; background-color:rgb(244,237,227)">
+<span style="margin:0px; padding:0px">socket相关函数：</span><br style="margin:0px; padding:0px">
+----------------------------------------------------------------------------------------------<br style="margin:0px; padding:0px">
+socket_accept() 接受一个Socket连接<br style="margin:0px; padding:0px">
+socket_bind() 把socket绑定在一个IP地址和端口上<br style="margin:0px; padding:0px">
+socket_clear_error() 清除socket的错误或者最后的错误代码<br style="margin:0px; padding:0px">
+socket_close() 关闭一个socket资源<br style="margin:0px; padding:0px">
+socket_connect() 开始一个socket连接<br style="margin:0px; padding:0px">
+socket_create_listen() 在指定端口打开一个socket监听<br style="margin:0px; padding:0px">
+socket_create_pair() 产生一对没有区别的socket到一个数组里<br style="margin:0px; padding:0px">
+socket_create() 产生一个socket，相当于产生一个socket的数据结构<br style="margin:0px; padding:0px">
+socket_get_option() 获取socket选项<br style="margin:0px; padding:0px">
+socket_getpeername() 获取远程类似主机的ip地址<br style="margin:0px; padding:0px">
+socket_getsockname() 获取本地socket的ip地址<br style="margin:0px; padding:0px">
+socket_iovec_add() 添加一个新的向量到一个分散/聚合的数组<br style="margin:0px; padding:0px">
+socket_iovec_alloc() 这个函数创建一个能够发送接收读写的iovec数据结构<br style="margin:0px; padding:0px">
+socket_iovec_delete() 删除一个已经分配的iovec<br style="margin:0px; padding:0px">
+socket_iovec_fetch() 返回指定的iovec资源的数据<br style="margin:0px; padding:0px">
+socket_iovec_free() 释放一个iovec资源<br style="margin:0px; padding:0px">
+socket_iovec_set() 设置iovec的数据新值<br style="margin:0px; padding:0px">
+socket_last_error() 获取当前socket的最后错误代码<br style="margin:0px; padding:0px">
+socket_listen() 监听由指定socket的所有连接<br style="margin:0px; padding:0px">
+socket_read() 读取指定长度的数据<br style="margin:0px; padding:0px">
+socket_readv() 读取从分散/聚合数组过来的数据<br style="margin:0px; padding:0px">
+socket_recv() 从socket里结束数据到缓存<br style="margin:0px; padding:0px">
+socket_recvfrom() 接受数据从指定的socket，如果没有指定则默认当前socket<br style="margin:0px; padding:0px">
+socket_recvmsg() 从iovec里接受消息<br style="margin:0px; padding:0px">
+socket_select() 多路选择<br style="margin:0px; padding:0px">
+socket_send() 这个函数发送数据到已连接的socket<br style="margin:0px; padding:0px">
+socket_sendmsg() 发送消息到socket<br style="margin:0px; padding:0px">
+socket_sendto() 发送消息到指定地址的socket<br style="margin:0px; padding:0px">
+socket_set_block() 在socket里设置为块模式<br style="margin:0px; padding:0px">
+socket_set_nonblock() socket里设置为非块模式<br style="margin:0px; padding:0px">
+socket_set_option() 设置socket选项<br style="margin:0px; padding:0px">
+socket_shutdown() 这个函数允许你关闭读、写、或者指定的socket<br style="margin:0px; padding:0px">
+socket_strerror() 返回指定错误号的详细错误<br style="margin:0px; padding:0px">
+socket_write() 写数据到socket缓存<br style="margin:0px; padding:0px">
+socket_writev() 写数据到分散/聚合数组</p>
+		</p>
+<pre style="margin-top:0px; margin-bottom:0px; padding:0px; white-space:pre-wrap; word-wrap:break-word; font-family:'Courier New'!important"><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)"> 1</span> &lt;?<span style="margin:0px; padding:0px; line-height:1.5!important">php
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)"> 2</span> <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,0)">//</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,0)">确保在连接客户端时不会超时</span>
+<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)"> 3</span> <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">set_time_limit</span>(0<span style="margin:0px; padding:0px; line-height:1.5!important">);
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)"> 4</span> 
+<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)"> 5</span> <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$ip</span> = '127.0.0.1'<span style="margin:0px; padding:0px; line-height:1.5!important">;
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)"> 6</span> <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$port</span> = 1935<span style="margin:0px; padding:0px; line-height:1.5!important">;
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)"> 7</span> 
+<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)"> 8</span> <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,0)">/*</span>
+<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)"> 9</span> <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,0)"> +-------------------------------
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">10</span> <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,0)"> *    @socket通信整个过程
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">11</span> <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,0)"> +-------------------------------
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">12</span> <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,0)"> *    @socket_create
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">13</span> <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,0)"> *    @socket_bind
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">14</span> <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,0)"> *    @socket_listen
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">15</span> <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,0)"> *    @socket_accept
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">16</span> <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,0)"> *    @socket_read
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">17</span> <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,0)"> *    @socket_write
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">18</span> <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,0)"> *    @socket_close
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">19</span> <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,0)"> +--------------------------------
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">20</span>  <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,0)">*/</span>
+<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">21</span> 
+<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">22</span> <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,0)">/*</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,0)">----------------    以下操作都是手册上的    -------------------</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,0)">*/</span>
+<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">23</span> <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,0,255)">if</span>((<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$sock</span> = socket_create(AF_INET,SOCK_STREAM,SOL_TCP)) &lt; 0<span style="margin:0px; padding:0px; line-height:1.5!important">) {
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">24</span>     <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,0,255)">echo</span> "socket_create() 失败的原因是:".socket_strerror(<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$sock</span>)."\n"<span style="margin:0px; padding:0px; line-height:1.5!important">;
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">25</span> <span style="margin:0px; padding:0px; line-height:1.5!important">}
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">26</span> 
+<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">27</span> <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,0,255)">if</span>((<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$ret</span> = socket_bind(<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$sock</span>,<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$ip</span>,<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$port</span>)) &lt; 0<span style="margin:0px; padding:0px; line-height:1.5!important">) {
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">28</span>     <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,0,255)">echo</span> "socket_bind() 失败的原因是:".socket_strerror(<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$ret</span>)."\n"<span style="margin:0px; padding:0px; line-height:1.5!important">;
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">29</span> <span style="margin:0px; padding:0px; line-height:1.5!important">}
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">30</span> 
+<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">31</span> <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,0,255)">if</span>((<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$ret</span> = socket_listen(<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$sock</span>,4)) &lt; 0<span style="margin:0px; padding:0px; line-height:1.5!important">) {
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">32</span>     <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,0,255)">echo</span> "socket_listen() 失败的原因是:".socket_strerror(<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$ret</span>)."\n"<span style="margin:0px; padding:0px; line-height:1.5!important">;
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">33</span> <span style="margin:0px; padding:0px; line-height:1.5!important">}
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">34</span> 
+<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">35</span> <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$count</span> = 0<span style="margin:0px; padding:0px; line-height:1.5!important">;
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">36</span> 
+<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">37</span> <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,0,255)">do</span><span style="margin:0px; padding:0px; line-height:1.5!important"> {
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">38</span>     <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,0,255)">if</span> ((<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$msgsock</span> = socket_accept(<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$sock</span>)) &lt; 0<span style="margin:0px; padding:0px; line-height:1.5!important">) {
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">39</span>         <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,0,255)">echo</span> "socket_accept() failed: reason: " . socket_strerror(<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$msgsock</span>) . "\n"<span style="margin:0px; padding:0px; line-height:1.5!important">;
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">40</span>         <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,0,255)">break</span><span style="margin:0px; padding:0px; line-height:1.5!important">;
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">41</span>     } <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,0,255)">else</span><span style="margin:0px; padding:0px; line-height:1.5!important"> {
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">42</span>         
+<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">43</span>         <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,0)">//</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,0)">发到客户端</span>
+<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">44</span>         <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$msg</span> ="测试成功！\n"<span style="margin:0px; padding:0px; line-height:1.5!important">;
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">45</span>         socket_write(<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$msgsock</span>, <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$msg</span>, <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">strlen</span>(<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$msg</span><span style="margin:0px; padding:0px; line-height:1.5!important">));
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">46</span>         
+<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">47</span>         <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,0,255)">echo</span> "测试成功了啊\n"<span style="margin:0px; padding:0px; line-height:1.5!important">;
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">48</span>         <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$buf</span> = socket_read(<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$msgsock</span>,8192<span style="margin:0px; padding:0px; line-height:1.5!important">);
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">49</span>         
+<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">50</span>         
+<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">51</span>         <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$talkback</span> = "收到的信息:<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$buf</span>\n"<span style="margin:0px; padding:0px; line-height:1.5!important">;
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">52</span>         <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,0,255)">echo</span> <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$talkback</span><span style="margin:0px; padding:0px; line-height:1.5!important">;
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">53</span>         
+<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">54</span>         <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,0,255)">if</span>(++<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$count</span> &gt;= 5<span style="margin:0px; padding:0px; line-height:1.5!important">){
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">55</span>             <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,0,255)">break</span><span style="margin:0px; padding:0px; line-height:1.5!important">;
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">56</span> <span style="margin:0px; padding:0px; line-height:1.5!important">        };
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">57</span>         
+<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">58</span>     
+<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">59</span> <span style="margin:0px; padding:0px; line-height:1.5!important">    }
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">60</span>     <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,0)">//</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,0)">echo $buf;</span>
+<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">61</span>     socket_close(<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$msgsock</span><span style="margin:0px; padding:0px; line-height:1.5!important">);
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">62</span> 
+<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">63</span> } <span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,0,255)">while</span> (<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,0,255)">true</span><span style="margin:0px; padding:0px; line-height:1.5!important">);
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">64</span> 
+<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">65</span> socket_close(<span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(128,0,128)">$sock</span><span style="margin:0px; padding:0px; line-height:1.5!important">);
+</span><span style="margin:0px; padding:0px; line-height:1.5!important; color:rgb(0,128,128)">66</span> ?&gt;</pre>
+	</div>
+</body>
+</html>
